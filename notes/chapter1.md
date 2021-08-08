@@ -1,0 +1,51 @@
+
+- Define Machine learning
+  - A computer program is said to learn from experience E with respect to some class of tasks T,and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E. 
+    - If a computer program learns from experience to quantiatively do some tasks better as measured by some performance metric.
+
+- Why am I reading this book ?
+  - A lot of smart people whom I greatly admire, respect and look up to think that this book is fantastic. 
+  - Absolutely convinced that this book is fundamental
+
+Why probabilistic ?
+  - Decision making under uncertainity
+  - From shakhir Mohammed at Deepmind
+    - Almost all of machine learning can be viewed in probabilistic terms, making probabilisticthinking fundamental. It is, of course, not the only view. But it is through this view that wecan connect what we do in machine learning to every other computational science, whether thatbe in stochastic optimisation, control theory, operations research, econometrics, informationtheory, statistical physics or bio-statistics. For this reason alone, mastery of probabilistic thinking is essential.
+
+- Supervised learning 
+    - Map $x$ $\isin$ $X$ to $y$ $\isin$ $Y$
+    - Experience set of size N containing input and output pairs 
+      - D = ${(x_n, y_n)}$
+    - Tasks
+      - Classification
+        - Y is an unordered set containing n mutually exclusive elements. $Y={1, 2, ...n}$
+        - Design Matrix $N*D$
+        - Before doing any ML, do exploratory data analysis
+          - Pairplots are good for tabular data with small number of features. 
+        - Decision tree repeatedly partitions the 2D space on the basis of rules to arrive at classification categories
+        - Empirical risk minimization
+          - Misclassification rate can be defined as 
+            - $L(\theta) = \sum_{n=1}^{n=N}I(y_n \not = f(x_n;theta))$ 
+            - $I$ is the indidicator function
+          - Empirical risk is average loss on the training set 
+            - $L(\theta) = \sum_{n=1}^{n=N}L(y_n, f(x_n;\theta))$ 
+          - Minimize empirical risk on the training set 
+            - $\hat{\theta}$ = $\argmin_{\theta}$ $L(\theta)$ 
+          - Our true goal is to minimize lose in future data. Be able to generalize. 
+        - Capture uncertainities with probabilities 
+          - $p(y=c | x; \theta) = softmax(f_c(x; \theta))$
+          - softmax ensures that probabilities are non negative and sum up to 1 
+            - `softmax(v)=e^^v / e^^v.sum()`
+          - $f$ is usually $w^Tx + b$
+        - MLE
+          - Maximize probability / minimize log probability 
+          - $NLL(\theta) = - \frac{1}{N} \sum_{n=1}^{n=N}logP(y_n|f_n(x_n;\theta))$
+          - Find $\argmin_\theta NLL(\theta)$
+      - Regression
+        - Y is a continous variable
+        - Assume outputs are distributed by a gaussian
+          - $N(y|\mu, \sigma^2)$ = $\frac{1}{\sqrt{2\pi\sigma^2}} \exp(\frac{-1}{2\sigma^2})(y-\mu)^2$
+        - Grouth truth is centered around predictions with some gaussian away
+          - $p(y|x, \theta)=N(y|f(x, \theta), \sigma^2)$
+        - NLL is proporitional to MLE
+        - If data has outliers quadratic penalty can be too serve, in such cases l1 loss is better. 
